@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.project.code }}-ingress
+  namespace: {{ .Values.project.code }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    {{- if eq .Values.project.prod false }}
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    {{- else }}
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    {{- end }}
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.project.code }}.noname2048.com
+      secretName: {{ .Values.project.code }}-tls
+  rules:
+    - host: {{ .Values.project.code }}.noname2048.com
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.project.code }}-clusterip
+                port:
+                  number: 80
