@@ -1,3 +1,4 @@
 project:
   code: polycube
   prod: true
+  targetPort: 5173
