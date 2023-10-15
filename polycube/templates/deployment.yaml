@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.project.code }}-deployment
+  namespace: {{ .Values.project.code }}
+  labels:
+    app: {{ .Values.project.code }}-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.project.code }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.project.code }}-app
+    spec:
+      containers:
+        - name: {{ .Values.project.code }}-container
+          image: ghcr.io/noname2048/{{ .Values.project.code }}:latest
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: ghcr-secret
