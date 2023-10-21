@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: default-pv-0
+spec:
+  capacity:
+    storage: 40Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: vultr-block-storage-hdd # StorageClass와 일치해야 합니다.
+  # csi:
+  #   driver: block.csi.vultr.com
+  #   volumeHandle: icn-d786b13cda044a
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: default-pv-1
+# spec:
+#   capacity:
+#     storage: 40Gi
+#   volumeMode: Filesystem
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: /data/default
+#   persistentVolumeReclaimPolicy: Delete
+#   storageClassName: vultr-block-storage-hdd # StorageClass와 일치해야 합니다.
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: default-pv-2
+# spec:
+#   capacity:
+#     storage: 40Gi
+#   volumeMode: Filesystem
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: /data/default
+#   persistentVolumeReclaimPolicy: Delete
+#   storageClassName: vultr-block-storage-hdd # StorageClass와 일치해야 합니다.
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: default-pv-3
+# spec:
+#   capacity:
+#     storage: 40Gi
+#   volumeMode: Filesystem
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: /data/default
+#   persistentVolumeReclaimPolicy: Delete
+#   storageClassName: vultr-block-storage-hdd # StorageClass와 일치해야 합니다.
